@@ -10,6 +10,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Novo aluno");
         setContentView(R.layout.activity_formulario_aluno);
     }
 }
