@@ -11,7 +11,6 @@ public class AlunoDAO {
 
     public void salva(Aluno aluno) {
         alunos.add(aluno);
-
     }
 
     public List<Aluno> todos() {
