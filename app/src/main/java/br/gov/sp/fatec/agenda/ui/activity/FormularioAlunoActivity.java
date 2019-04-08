@@ -50,7 +50,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private void salva(Aluno aluno) {
         dao.salva(aluno);
 
-        Toast.makeText(this, "Aluno inserido!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Aluno " + campoNome.getText().toString() + " salvo!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
