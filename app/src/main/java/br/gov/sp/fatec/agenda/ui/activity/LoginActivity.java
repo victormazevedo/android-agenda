@@ -65,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     @Override
                     public void run() {
-                        falhaLogin();
                         progressDialog.dismiss();
+                        finish();
                     }
                 }, 3000);
 
