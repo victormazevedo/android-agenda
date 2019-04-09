@@ -31,40 +31,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
     private ActionBar actionBar;
 
     @Override
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
         setTitle(TITULO_APPBAR);
-        actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#303F9F")));
+        definirCorActionBar();
 
-        drawerLayout = findViewById(R.id.activity_main);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
-
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        navigationView = findViewById(R.id.activity_lista_alunos_navigation_view);
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                switch (id) {
-                    case R.id.account:
-                        Toast.makeText(ListaAlunosActivity.this, "My Account", Toast.LENGTH_SHORT).show();
-                    case R.id.settings:
-                        Toast.makeText(ListaAlunosActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-                    case R.id.info:
-                        Toast.makeText(ListaAlunosActivity.this, "My Cart", Toast.LENGTH_SHORT).show();
-                    default:
-                        return true;
-                }
-            }
-        });
+        iniciarNavigationDrawer();
         configuraFabNovoAluno();
     }
 
@@ -82,6 +55,17 @@ public class ListaAlunosActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        configuraLista();
+    }
+
+    private void definirCorActionBar() {
+        actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#303F9F")));
+    }
+
     private void configuraFabNovoAluno() {
         FloatingActionButton botaoNovoAluno = findViewById(R.id.activity_lista_alunos_fab_novo_aluno);
         botaoNovoAluno.setOnClickListener(new View.OnClickListener() {
@@ -92,14 +76,39 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
     }
 
-    private void abreFormularioAlunoActivity() {
-        startActivity(new Intent(this, FormularioAlunoActivity.class));
+    private void iniciarNavigationDrawer() {
+        drawerLayout = findViewById(R.id.activity_main);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        navigationView = findViewById(R.id.activity_lista_alunos_navigation_view);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.account:
+                        Toast.makeText(ListaAlunosActivity.this, "Minha conta", Toast.LENGTH_SHORT).show();
+                    case R.id.settings:
+                        Toast.makeText(ListaAlunosActivity.this, "Configurações", Toast.LENGTH_SHORT).show();
+                    case R.id.info:
+                        Toast.makeText(ListaAlunosActivity.this, "Sobre", Toast.LENGTH_SHORT).show();
+                    case R.id.add_aluno:
+                        abreFormularioAlunoActivity();
+                    default:
+                        return true;
+                }
+            }
+        });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        configuraLista();
+    private void abreFormularioAlunoActivity() {
+        startActivity(new Intent(this, FormularioAlunoActivity.class));
     }
 
     private void configuraLista() {

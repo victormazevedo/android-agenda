@@ -16,10 +16,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="16dp"
+            android:backgroundTint="@color/primary_dark"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/ic_action_novo_aluno"
-            android:backgroundTint="@color/primary_dark"/>
+            android:src="@drawable/ic_action_novo_aluno" />
 
         <ListView
             android:id="@+id/activity_lista_alunos_listview"

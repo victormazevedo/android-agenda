@@ -4,15 +4,21 @@
     <item
         android:id="@+id/account"
         android:icon="@drawable/ic_navigation_profile"
-        android:title="Minha conta" />
+        android:title="@string/MinhaConta" />
+
     <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_navigation_settings"
-        android:title="Configurações" />
+        android:id="@+id/add_aluno"
+        android:icon="@drawable/ic_navigation_add_user"
+        android:title="@string/AddAluno" />
+
     <group android:id="@+id/grupo_settings_info">
         <item
             android:id="@+id/info"
             android:icon="@drawable/ic_navigation_info"
-            android:title="Sobre" />
+            android:title="@string/Sobre" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_navigation_settings"
+            android:title="@string/Configuracoes" />
     </group>
 </menu>

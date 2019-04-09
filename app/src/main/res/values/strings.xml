@@ -2,4 +2,8 @@
     <string name="app_name">Agenda</string>
     <string name="Open">open</string>
     <string name="Close">close</string>
+    <string name="MinhaConta">Minha Conta</string>
+    <string name="Configuracoes">Configurações</string>
+    <string name="Sobre">Sobre</string>
+    <string name="AddAluno">Adicionar aluno</string>
 </resources>
