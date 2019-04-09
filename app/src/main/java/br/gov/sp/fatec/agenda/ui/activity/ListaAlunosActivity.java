@@ -15,7 +15,6 @@ import br.gov.sp.fatec.agenda.dao.AlunoDAO;
 public class ListaAlunosActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Lista de Alunos";
-    private final AlunoDAO dao = new AlunoDAO();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,8 +22,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_alunos);
 
         setTitle(TITULO_APPBAR);
+
         configuraFabNovoAluno();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     private void configuraFabNovoAluno() {
@@ -44,15 +49,17 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         configuraLista();
     }
 
     private void configuraLista() {
+        AlunoDAO dao = new AlunoDAO(this);
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
         listaDeAlunos.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                dao.todos()));
+                dao.buscaAlunos()));
+        dao.close();
+
     }
 }

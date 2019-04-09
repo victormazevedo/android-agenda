@@ -2,15 +2,19 @@ package br.gov.sp.fatec.agenda.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class AlunoDAO extends SQLiteOpenHelper {
 
-//    private final static List<Aluno> alunos = new ArrayList<>();
+    private final List<Aluno> alunos = new ArrayList<>();
 
     public AlunoDAO(@Nullable Context context) {
         super(context, "iAcad", null, 1);
@@ -39,6 +43,25 @@ public class AlunoDAO extends SQLiteOpenHelper {
         dados.put("nota", aluno.getNota());
 
         db.insert("Alunos", null, dados);
+    }
+
+    public List<Aluno> buscaAlunos() {
+        String sql = "SELECT * FROM Alunos;";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            Aluno aluno = new Aluno();
+            aluno.setId(cursor.getLong(cursor.getColumnIndex("id")));
+            aluno.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            aluno.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
+            aluno.setEmail(cursor.getString(cursor.getColumnIndex("email")));
+            aluno.setNota(cursor.getDouble(cursor.getColumnIndex("nota")));
+
+            alunos.add(aluno);
+        }
+        cursor.close();
+
+        return alunos;
     }
 
 //    public void salva(Aluno aluno) {

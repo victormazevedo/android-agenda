@@ -17,7 +17,6 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private EditText campoNome;
     private EditText campoTelefone;
     private EditText campoEmail;
-    private final AlunoDAO dao = new AlunoDAO(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     }
 
     private void salva(Aluno aluno) {
+        AlunoDAO dao = new AlunoDAO(this);
         dao.insere(aluno);
         dao.close();
 
