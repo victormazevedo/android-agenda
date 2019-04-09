@@ -59,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (email.equals(EMAIL) && senha.equals(SENHA)) {
             sucessoLogin();
+        } else {
+            falhaLogin();
         }
 
         new Handler().postDelayed(
@@ -66,12 +68,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         progressDialog.dismiss();
-                        finish();
                     }
                 }, 3000);
 
     }
-
 
     private void sucessoLogin() {
         botaoLogar.setEnabled(true);
