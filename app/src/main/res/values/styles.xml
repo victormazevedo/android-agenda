@@ -27,4 +27,8 @@
         <item name="android:background">@color/primary</item>
     </style>
 
+    <style name="MyActionBar" parent="Theme.AppCompat.Light">
+        <item name="android:background">@color/primary_dark</item>
+    </style>
+
 </resources>
