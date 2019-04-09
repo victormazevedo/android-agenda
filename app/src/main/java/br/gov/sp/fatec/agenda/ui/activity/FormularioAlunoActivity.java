@@ -17,7 +17,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private EditText campoNome;
     private EditText campoTelefone;
     private EditText campoEmail;
-    private final AlunoDAO dao = new AlunoDAO();
+    private final AlunoDAO dao = new AlunoDAO(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,8 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     }
 
     private void salva(Aluno aluno) {
-        dao.salva(aluno);
+        dao.insere(aluno);
+        dao.close();
 
         Toast.makeText(this, "Aluno " + campoNome.getText().toString() + " salvo!", Toast.LENGTH_SHORT).show();
         finish();

@@ -1,18 +1,16 @@
 package br.gov.sp.fatec.agenda.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class AlunoDAO extends SQLiteOpenHelper {
 
-    private final static List<Aluno> alunos = new ArrayList<>();
+//    private final static List<Aluno> alunos = new ArrayList<>();
 
     public AlunoDAO(@Nullable Context context) {
         super(context, "iAcad", null, 1);
@@ -31,11 +29,23 @@ public class AlunoDAO extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void salva(Aluno aluno) {
-        alunos.add(aluno);
+    public void insere(Aluno aluno) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues dados = new ContentValues();
+        dados.put("nome", aluno.getNome());
+        dados.put("telefone", aluno.getTelefone());
+        dados.put("email", aluno.getEmail());
+        dados.put("nota", aluno.getNota());
+
+        db.insert("Alunos", null, dados);
     }
 
-    public List<Aluno> todos() {
-        return new ArrayList<>(alunos);
-    }
+//    public void salva(Aluno aluno) {
+//        alunos.add(aluno);
+//    }
+//
+//    public List<Aluno> todos() {
+//        return new ArrayList<>(alunos);
+//    }
 }
