@@ -3,9 +3,10 @@ package br.gov.sp.fatec.agenda.model;
 import android.support.annotation.NonNull;
 
 public class Aluno {
-    private final String nome;
-    private final String telefone;
-    private final String email;
+    private String nome;
+    private String telefone;
+    private String email;
+    private Double nota;
 
     public Aluno(String nome, String telefone, String email) {
         this.nome = nome;
