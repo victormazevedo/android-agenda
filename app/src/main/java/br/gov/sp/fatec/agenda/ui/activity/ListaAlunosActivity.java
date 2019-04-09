@@ -99,6 +99,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                     case R.id.info:
                         Toast.makeText(ListaAlunosActivity.this, "Sobre", Toast.LENGTH_SHORT).show();
                     case R.id.add_aluno:
+                        drawerLayout.closeDrawers();
                         abreFormularioAlunoActivity();
                     default:
                         return true;

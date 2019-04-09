@@ -1,6 +1,9 @@
 package br.gov.sp.fatec.agenda.ui.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private EditText campoNome;
     private EditText campoTelefone;
     private EditText campoEmail;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
         setTitle(TITULO_APPBAR);
         inicializacaoDosCampos();
+        definirCorActionBar();
         configuraBotaoSalvar();
     }
 
@@ -38,6 +43,11 @@ public class FormularioAlunoActivity extends AppCompatActivity {
                 salva(alunoCriado);
             }
         });
+    }
+
+    private void definirCorActionBar() {
+        actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#303F9F")));
     }
 
     private void inicializacaoDosCampos() {
