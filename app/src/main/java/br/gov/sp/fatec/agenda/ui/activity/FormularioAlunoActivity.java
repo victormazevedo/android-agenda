@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.agenda.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import br.gov.sp.fatec.agenda.model.Aluno;
 public class FormularioAlunoActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Novo aluno";
+    private Aluno aluno;
     private EditText campoNome;
     private EditText campoTelefone;
     private EditText campoEmail;
@@ -26,11 +28,23 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
-
         setTitle(TITULO_APPBAR);
         inicializacaoDosCampos();
         definirCorActionBar();
+
+        Intent intent = getIntent();
+        Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
+        if (aluno != null) {
+            preencheFormulario(aluno);
+        }
         configuraBotaoSalvar();
+    }
+
+    public void preencheFormulario(Aluno aluno) {
+        campoNome.setText(aluno.getNome());
+        campoTelefone.setText(aluno.getTelefone());
+        campoEmail.setText(aluno.getEmail());
+        this.aluno = aluno;
     }
 
     private void configuraBotaoSalvar() {
@@ -66,10 +80,9 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     }
 
     private Aluno criaAluno() {
-        String nome = campoNome.getText().toString();
-        String telefone = campoTelefone.getText().toString();
-        String email = campoEmail.getText().toString();
-
-        return new Aluno(nome, telefone, email);
+        aluno.setNome(campoNome.getText().toString());
+        aluno.setTelefone(campoTelefone.getText().toString());
+        aluno.setEmail(campoEmail.getText().toString());
+        return aluno;
     }
 }
