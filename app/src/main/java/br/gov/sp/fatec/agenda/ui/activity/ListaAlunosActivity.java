@@ -38,14 +38,22 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-        listaAlunos = findViewById(R.id.activity_lista_alunos_listview);
         setTitle(TITULO_APPBAR);
         definirCorActionBar();
+
+        listaAlunos = findViewById(R.id.activity_lista_alunos_listview);
+        listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(position);
+                Toast.makeText(ListaAlunosActivity.this, "Aluno: " + aluno.getNome(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         iniciarNavigationDrawer();
         configuraFabNovoAluno();
 
-        registerForContextMenu(listaAlunos);
+        registerForContextMenu(listaAlunos);//menu de contexto para abrir a opcão de Deletar ao segurar
     }
 
     @Override
@@ -66,7 +74,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
