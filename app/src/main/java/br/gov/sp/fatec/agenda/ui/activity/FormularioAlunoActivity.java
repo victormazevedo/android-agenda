@@ -72,7 +72,11 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void salva(Aluno aluno) {
         AlunoDAO dao = new AlunoDAO(this);
-        dao.insere(aluno);
+        if (aluno.getId() != null) {
+            dao.altera(aluno);
+        } else {
+            dao.insere(aluno);
+        }
         dao.close();
 
         Toast.makeText(this, "Aluno " + campoNome.getText().toString() + " salvo!", Toast.LENGTH_SHORT).show();
