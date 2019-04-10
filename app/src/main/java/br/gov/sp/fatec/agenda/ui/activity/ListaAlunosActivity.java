@@ -12,19 +12,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
+import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Lista de Alunos";
 
+    private ListView listaAlunos;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
@@ -34,12 +38,35 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+        listaAlunos = findViewById(R.id.activity_lista_alunos_listview);
         setTitle(TITULO_APPBAR);
         definirCorActionBar();
 
         iniciarNavigationDrawer();
         configuraFabNovoAluno();
+
+        registerForContextMenu(listaAlunos);
     }
+
+    @Override
+    public void onCreateContextMenu(final ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        MenuItem deletar = menu.add("Deletar");
+        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
+
+                AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
+                dao.deleta(aluno);
+                dao.close();
+
+                configuraLista();
+                return false;
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -120,6 +147,5 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 dao.buscaAlunos()));
         dao.close();
-
     }
 }
