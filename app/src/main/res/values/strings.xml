@@ -6,4 +6,12 @@
     <string name="Configuracoes">Configurações</string>
     <string name="Sobre">Sobre</string>
     <string name="AddAluno">Adicionar aluno</string>
+    <string name="About">
+        Projeto realizado para a disciplina Programação para Dispositvos Móveis da Fatec Ribeirão Preto.\n
+        O objetivo do iAcad é auxiliar professores para uma melhor gestão de alunos, faltas e notas.
+    </string>
+    <string name="Author">
+        Desenvolvido por: Victor Moura Azevedo\n
+        RA: 2840481613039
+    </string>
 </resources>

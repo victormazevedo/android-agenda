@@ -133,7 +133,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 } else if (id == R.id.settings) {
                     Toast.makeText(ListaAlunosActivity.this, "Configurações", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.info) {
-
+                    drawerLayout.closeDrawers();
+                    startActivity(new Intent(ListaAlunosActivity.this, AboutActivity.class));
                 } else if (id == R.id.add_aluno) {
                     drawerLayout.closeDrawers();
                     abreFormularioAlunoActivity();
