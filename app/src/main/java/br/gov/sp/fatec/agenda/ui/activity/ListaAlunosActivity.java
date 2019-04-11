@@ -127,19 +127,18 @@ public class ListaAlunosActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                switch (id) {
-                    case R.id.account:
-                        Toast.makeText(ListaAlunosActivity.this, "Minha conta", Toast.LENGTH_SHORT).show();
-                    case R.id.settings:
-                        Toast.makeText(ListaAlunosActivity.this, "Configurações", Toast.LENGTH_SHORT).show();
-                    case R.id.info:
-                        Toast.makeText(ListaAlunosActivity.this, "Sobre", Toast.LENGTH_SHORT).show();
-                    case R.id.add_aluno:
-                        drawerLayout.closeDrawers();
-                        abreFormularioAlunoActivity();
-                    default:
-                        return true;
+
+                if (id == R.id.account) {
+                    Toast.makeText(ListaAlunosActivity.this, "Minha conta", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.settings) {
+                    Toast.makeText(ListaAlunosActivity.this, "Configurações", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.info) {
+
+                } else if (id == R.id.add_aluno) {
+                    drawerLayout.closeDrawers();
+                    abreFormularioAlunoActivity();
                 }
+                return false;
             }
         });
     }

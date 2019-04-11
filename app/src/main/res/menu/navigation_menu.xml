@@ -11,14 +11,13 @@
         android:icon="@drawable/ic_navigation_add_user"
         android:title="@string/AddAluno" />
 
-    <group android:id="@+id/grupo_settings_info">
-        <item
-            android:id="@+id/info"
-            android:icon="@drawable/ic_navigation_info"
-            android:title="@string/Sobre" />
-        <item
-            android:id="@+id/settings"
-            android:icon="@drawable/ic_navigation_settings"
-            android:title="@string/Configuracoes" />
-    </group>
+    <item
+        android:id="@+id/info"
+        android:icon="@drawable/ic_navigation_info"
+        android:title="@string/Sobre" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_navigation_settings"
+        android:title="@string/Configuracoes" />
+
 </menu>
