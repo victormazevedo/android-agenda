@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
@@ -19,9 +18,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Novo aluno";
     private Aluno aluno;
-    private EditText campoNome;
-    private EditText campoTelefone;
-    private EditText campoEmail;
+    private FormularioHelper helper;
     private ActionBar actionBar;
 
     @Override
@@ -29,31 +26,25 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
         setTitle(TITULO_APPBAR);
-        inicializacaoDosCampos();
         definirCorActionBar();
+
+        helper = new FormularioHelper(this);
 
         Intent intent = getIntent();
         Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
         if (aluno != null) {
-            preencheFormulario(aluno);
+            helper.preencheFormulario(aluno);
         }
         configuraBotaoSalvar();
     }
 
-    public void preencheFormulario(Aluno aluno) {
-        campoNome.setText(aluno.getNome());
-        campoTelefone.setText(aluno.getTelefone());
-        campoEmail.setText(aluno.getEmail());
-        this.aluno = aluno;
-    }
 
     private void configuraBotaoSalvar() {
         Button botaoSalvar = findViewById(R.id.activity_formulario_aluno_botao_salvar);
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Aluno alunoCriado = criaAluno();
-
+                Aluno alunoCriado = helper.getAluno();
                 salva(alunoCriado);
             }
         });
@@ -64,29 +55,18 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#303F9F")));
     }
 
-    private void inicializacaoDosCampos() {
-        campoNome = findViewById(R.id.activity_formulario_aluno_nome);
-        campoTelefone = findViewById(R.id.activity_formulario_aluno_telefone);
-        campoEmail = findViewById(R.id.activity_formulario_aluno_email);
-    }
 
     private void salva(Aluno aluno) {
         AlunoDAO dao = new AlunoDAO(this);
-        if (aluno.getId() != null) {
+        if(aluno.getId() != null){
             dao.altera(aluno);
-        } else {
+        }else{
             dao.insere(aluno);
         }
         dao.close();
 
-        Toast.makeText(this, "Aluno " + campoNome.getText().toString() + " salvo!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Aluno " + aluno.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
-    private Aluno criaAluno() {
-        aluno.setNome(campoNome.getText().toString());
-        aluno.setTelefone(campoTelefone.getText().toString());
-        aluno.setEmail(campoEmail.getText().toString());
-        return aluno;
-    }
 }

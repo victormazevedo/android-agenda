@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -13,8 +14,6 @@ import java.util.List;
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class AlunoDAO extends SQLiteOpenHelper {
-
-    private final List<Aluno> alunos = new ArrayList<>();
 
     public AlunoDAO(@Nullable Context context) {
         super(context, "iAcad", null, 1);
@@ -41,6 +40,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         db.insert("Alunos", null, dados);
     }
 
+    @NonNull
     private ContentValues pegaDadosDoAluno(Aluno aluno) {
         ContentValues dados = new ContentValues();
         dados.put("nome", aluno.getNome());
@@ -54,6 +54,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         String sql = "SELECT * FROM Alunos;";
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
+        List<Aluno> alunos = new ArrayList<>();
         while (cursor.moveToNext()) {
             Aluno aluno = new Aluno();
             aluno.setId(cursor.getLong(cursor.getColumnIndex("id")));
