@@ -11,9 +11,38 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.activity.RegistroActivity" android:theme="@style/AppTheme.Dark">
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
+
+
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
+        </activity>
         <activity
             android:name=".ui.activity.SplashScreenActivity"
             android:theme="@style/AppCompat.TelaCheia">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:theme="@style/AppTheme.Dark">
+
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.FormularioAlunoActivity" />
+        <activity android:name=".ui.activity.ListaAlunosActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -21,23 +50,8 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".ui.activity.LoginActivity"
-            android:theme="@style/AppTheme.Dark">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".ui.activity.FormularioAlunoActivity" />
-        <activity android:name=".ui.activity.ListaAlunosActivity">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.activity.AboutActivity" android:theme="@style/AppTheme.Dark"/>
+            android:name=".ui.activity.AboutActivity"
+            android:theme="@style/AppTheme.Dark" />
     </application>
 
 </manifest>

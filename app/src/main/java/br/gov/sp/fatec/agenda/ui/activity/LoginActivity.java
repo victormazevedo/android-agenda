@@ -36,6 +36,16 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+
+        textoRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegistroActivity.class);
+                startActivityForResult(intent, 0);
+                finish();
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            }
+        });
     }
 
     private void login() {
