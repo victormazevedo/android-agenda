@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.agenda.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +13,10 @@ public class AvisoDAO {
 
     public List<Aviso> todos() {
         return (List<Aviso>) avisos.clone();
+    }
+
+    public void insere(Aviso... avisos) {
+        AvisoDAO.avisos.addAll(Arrays.asList(avisos));
     }
 
     public void altera(int posicao, Aviso aviso) {

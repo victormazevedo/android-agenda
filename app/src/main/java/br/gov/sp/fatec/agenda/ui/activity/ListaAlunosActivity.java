@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
-import br.gov.sp.fatec.agenda.dao.UsuarioDAO;
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -140,7 +139,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                     abreFormularioAlunoActivity();
                 } else if (id == R.id.avisos) {
-
+                    drawerLayout.closeDrawers();
+                    startActivity(new Intent(ListaAlunosActivity.this, ListaAvisosActivity.class));
                 }
                 return false;
             }
