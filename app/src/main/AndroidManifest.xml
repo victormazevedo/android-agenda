@@ -31,10 +31,10 @@
             android:name=".ui.activity.SplashScreenActivity"
             android:theme="@style/AppCompat.TelaCheia">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity> <!-- Tela de Login -->
         <activity
             android:name=".ui.activity.LoginActivity"
@@ -48,10 +48,10 @@
         <activity android:name=".ui.activity.FormularioAlunoActivity" /> <!-- Tela LISTA ALUNOS -->
         <activity android:name=".ui.activity.ListaAlunosActivity">
 
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.AboutActivity"

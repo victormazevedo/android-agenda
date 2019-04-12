@@ -139,6 +139,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 } else if (id == R.id.add_aluno) {
                     drawerLayout.closeDrawers();
                     abreFormularioAlunoActivity();
+                } else if (id == R.id.avisos) {
+
                 }
                 return false;
             }

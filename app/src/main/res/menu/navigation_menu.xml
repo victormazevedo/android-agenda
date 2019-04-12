@@ -12,6 +12,11 @@
         android:title="@string/AddAluno" />
 
     <item
+        android:id="@+id/avisos"
+        android:icon="@drawable/ic_navigation_aviso"
+        android:title="@string/avisos" />
+
+    <item
         android:id="@+id/info"
         android:icon="@drawable/ic_navigation_info"
         android:title="@string/Sobre" />
