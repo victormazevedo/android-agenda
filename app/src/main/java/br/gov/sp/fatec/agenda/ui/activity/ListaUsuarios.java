@@ -21,6 +21,7 @@ public class ListaUsuarios extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_usuarios);
+        setTitle(TITULO_APPBAR);
         definirCorActionBar();
 
         UsuarioDAO dao = new UsuarioDAO(this);
