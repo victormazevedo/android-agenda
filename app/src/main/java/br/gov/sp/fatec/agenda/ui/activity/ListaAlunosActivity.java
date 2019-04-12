@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
+import br.gov.sp.fatec.agenda.dao.UsuarioDAO;
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -157,4 +158,5 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 dao.buscaAlunos()));
         dao.close();
     }
+
 }

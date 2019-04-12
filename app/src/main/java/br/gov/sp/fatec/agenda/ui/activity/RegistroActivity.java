@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
+import br.gov.sp.fatec.agenda.dao.UsuarioDAO;
+import br.gov.sp.fatec.agenda.model.Usuario;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -60,7 +62,29 @@ public class RegistroActivity extends AppCompatActivity {
         String senha = campoSenha.getText().toString();
         String redigiteSenha = campoRedigiteSenha.getText().toString();
 
+        UsuarioDAO dao = new UsuarioDAO(this);
 
+        Usuario usuarioCriado = new Usuario(nome, email, telefone, senha);
+
+        dao.insere(usuarioCriado);
+        dao.close();
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        // On complete call either onSignupSuccess or onSignupFailed
+                        // depending on success
+                        onSignupSuccess();
+                        // onSignupFailed();
+                        progressDialog.dismiss();
+                    }
+                }, 3000);
+    }
+
+    private void onSignupSuccess() {
+        botaoRegistrar.setEnabled(true);
+        setResult(RESULT_OK, null);
+        finish();
     }
 
     private void onSignupFailed() {
@@ -92,7 +116,7 @@ public class RegistroActivity extends AppCompatActivity {
             campoNome.setError(null);
         }
 
-        if (telefone.isEmpty() || telefone.length()!=10) {
+        if (telefone.isEmpty() || telefone.length() != 10) {
             campoTelefone.setError("insira um telefone válido");
             valido = false;
         } else {

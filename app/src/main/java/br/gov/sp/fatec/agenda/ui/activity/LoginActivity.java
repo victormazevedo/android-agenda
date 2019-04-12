@@ -2,6 +2,8 @@ package br.gov.sp.fatec.agenda.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 import br.gov.sp.fatec.agenda.R;
+import br.gov.sp.fatec.agenda.dao.UsuarioDAO;
+import br.gov.sp.fatec.agenda.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -42,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegistroActivity.class);
                 startActivityForResult(intent, 0);
-                finish();
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
@@ -64,8 +70,21 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Autenticando...");
         progressDialog.show();
 
+//        Cursor cursor;
+//
+//
+//
         String email = campoEmail.getText().toString();
         String senha = campoSenha.getText().toString();
+//
+//        UsuarioDAO dao = new UsuarioDAO(this);
+//
+//        if (dao.buscaParaLogar()) {
+//            sucessoLogin();
+//        } else {
+//            Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show();
+//            botaoLogar.setEnabled(true);
+//        }
 
         if (email.equals(EMAIL) && senha.equals(SENHA)) {
             sucessoLogin();

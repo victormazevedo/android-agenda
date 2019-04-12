@@ -10,7 +10,16 @@ public class Usuario implements Serializable {
     private String email;
     private String senha;
     private String telefone;
-    private String descricao;
+
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String email, String senha, String telefone) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+    }
 
     public Long getId() {
         return id;
@@ -42,14 +51,6 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public String getTelefone() {
