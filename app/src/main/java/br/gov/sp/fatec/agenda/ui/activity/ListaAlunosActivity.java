@@ -142,7 +142,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 if (id == R.id.account) {
                     Toast.makeText(ListaAlunosActivity.this, "Minha conta", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.settings) {
-                    Toast.makeText(ListaAlunosActivity.this, "Configurações", Toast.LENGTH_SHORT).show();
+                    drawerLayout.closeDrawers();
+                    startActivity(new Intent(ListaAlunosActivity.this, ConfiguracaoActivity.class));
                 } else if (id == R.id.info) {
                     drawerLayout.closeDrawers();
                     startActivity(new Intent(ListaAlunosActivity.this, AboutActivity.class));

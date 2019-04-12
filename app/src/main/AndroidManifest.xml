@@ -11,13 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.activity.ConfiguracaoActivity"></activity>
         <activity android:name=".ui.activity.ListaUsuarios">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <!-- Tela de Registro -->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity> <!-- Tela de Registro -->
         <activity
             android:name=".ui.activity.RegistroActivity"
             android:theme="@style/AppTheme.Dark">
@@ -31,10 +32,10 @@
             android:name=".ui.activity.SplashScreenActivity"
             android:theme="@style/AppCompat.TelaCheia">
 
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity> <!-- Tela de Login -->
         <activity
             android:name=".ui.activity.LoginActivity"
@@ -47,24 +48,25 @@
         </activity> <!-- Tela Formulario -->
         <activity android:name=".ui.activity.FormularioAlunoActivity" /> <!-- Tela LISTA ALUNOS -->
         <activity android:name=".ui.activity.ListaAlunosActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.AboutActivity"
             android:theme="@style/AppTheme.Dark" />
-
         <activity android:name=".ui.activity.ListaAvisosActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ui.activity.FormularioAvisoActivity"></activity>
+        <activity android:name=".ui.activity.FormularioAvisoActivity" />
     </application>
 
 </manifest>

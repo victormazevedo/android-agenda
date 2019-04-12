@@ -16,4 +16,6 @@
     </string>
     <string name="TitleApp">iAcad</string>
     <string name="avisos">Avisos</string>
+    <string name="channel_name">Teste</string>
+    <string name="channel_description">Teste de Notification</string>
 </resources>
