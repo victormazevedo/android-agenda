@@ -74,8 +74,8 @@ public class LoginActivity extends AppCompatActivity {
 //
 //
 //
-        String email = campoEmail.getText().toString();
-        String senha = campoSenha.getText().toString();
+        final String email = campoEmail.getText().toString();
+        final String senha = campoSenha.getText().toString();
 //
 //        UsuarioDAO dao = new UsuarioDAO(this);
 //
@@ -86,19 +86,20 @@ public class LoginActivity extends AppCompatActivity {
 //            botaoLogar.setEnabled(true);
 //        }
 
-        if (email.equals(EMAIL) && senha.equals(SENHA)) {
-            sucessoLogin();
-        } else {
-            falhaLogin();
-        }
+
 
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
+                        if (email.equals(EMAIL) && senha.equals(SENHA)) {
+                            sucessoLogin();
+                        } else {
+                            falhaLogin();
+                        }
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 2000);
 
     }
 
@@ -113,8 +114,10 @@ public class LoginActivity extends AppCompatActivity {
             campoEmail.setError("email não cadastrado!");
         } else if (!campoEmail.getText().toString().equals(EMAIL)) {
             campoEmail.setError("email não cadastrado!");
+            campoSenha.setText("");
         } else {
             campoSenha.setError("senha incorreta!");
+            campoSenha.setText("");
         }
 
         botaoLogar.setEnabled(true);

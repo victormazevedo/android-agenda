@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.agenda.ui.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -36,6 +37,15 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signup();
+            }
+        });
+
+        loginLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
     }
