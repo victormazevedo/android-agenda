@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.agenda.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -65,13 +67,22 @@ public class ListaAlunosActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
+                final Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
 
-                AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
-                dao.deleta(aluno);
-                dao.close();
-
-                configuraLista();
+                new AlertDialog.Builder(ListaAlunosActivity.this)
+                        .setTitle("Deletar Aluno")
+                        .setMessage("Tem certeza que deseja deletar este aluno?")
+                        .setPositiveButton("sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
+                                dao.deleta(aluno);
+                                dao.close();
+                                configuraLista();
+                            }
+                        })
+                        .setNegativeButton("não", null)
+                        .show();
                 return false;
             }
         });
