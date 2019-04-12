@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
@@ -140,7 +139,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
 
                 if (id == R.id.account) {
-                    Toast.makeText(ListaAlunosActivity.this, "Minha conta", Toast.LENGTH_SHORT).show();
+                    drawerLayout.closeDrawers();
+                    startActivity(new Intent(ListaAlunosActivity.this, ListaUsuarios.class));
                 } else if (id == R.id.settings) {
                     drawerLayout.closeDrawers();
                     startActivity(new Intent(ListaAlunosActivity.this, ConfiguracaoActivity.class));

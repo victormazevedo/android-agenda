@@ -2,8 +2,6 @@ package br.gov.sp.fatec.agenda.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import br.gov.sp.fatec.agenda.R;
-import br.gov.sp.fatec.agenda.dao.UsuarioDAO;
-import br.gov.sp.fatec.agenda.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -87,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
 //        }
 
 
-
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
@@ -112,14 +105,18 @@ public class LoginActivity extends AppCompatActivity {
         if (!campoSenha.getText().toString().equals(SENHA) && !campoEmail.getText().toString().equals(EMAIL)) {
             campoSenha.setError("senha incorreta!");
             campoEmail.setError("email não cadastrado!");
+
+            campoSenha.setText("");
+            campoEmail.setText("");
         } else if (!campoEmail.getText().toString().equals(EMAIL)) {
             campoEmail.setError("email não cadastrado!");
-            campoSenha.setText("");
+            campoEmail.setText("");
         } else {
             campoSenha.setError("senha incorreta!");
             campoSenha.setText("");
         }
 
+        Toast.makeText(this, "Falha no login!", Toast.LENGTH_SHORT).show();
         botaoLogar.setEnabled(true);
     }
 
