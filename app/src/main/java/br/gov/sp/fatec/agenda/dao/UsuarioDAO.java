@@ -19,7 +19,7 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         super(context, "iAcadUser", null, 1);
     }
 
-    String TempPassword = "NOT_FOUND";
+    private String TempPassword = "NOT_FOUND";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
