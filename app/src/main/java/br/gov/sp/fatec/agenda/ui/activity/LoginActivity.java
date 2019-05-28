@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
+import br.gov.sp.fatec.agenda.dao.UsuarioDAO;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -64,36 +65,24 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Autenticando...");
         progressDialog.show();
 
-//        Cursor cursor;
-//
-//
-//
         final String email = campoEmail.getText().toString();
         final String senha = campoSenha.getText().toString();
-//
-//        UsuarioDAO dao = new UsuarioDAO(this);
-//
-//        if (dao.buscaParaLogar()) {
-//            sucessoLogin();
-//        } else {
-//            Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show();
-//            botaoLogar.setEnabled(true);
-//        }
 
+        final UsuarioDAO dao = new UsuarioDAO(this);
 
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
-                        if (email.equals(EMAIL) && senha.equals(SENHA)) {
+                        if (dao.buscaParaLogar(email, senha)) {
                             sucessoLogin();
                         } else {
                             falhaLogin();
+                            botaoLogar.setEnabled(true);
                         }
                         progressDialog.dismiss();
                     }
                 }, 2000);
-
     }
 
     private void sucessoLogin() {
