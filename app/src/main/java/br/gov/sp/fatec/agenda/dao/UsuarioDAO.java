@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class UsuarioDAO extends SQLiteOpenHelper {
     public UsuarioDAO(@Nullable Context context) {
         super(context, "iAcadUser", null, 1);
     }
+
+    String TempPassword = "NOT_FOUND";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -57,22 +60,21 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         return alunos;
     }
 
-    public List<Usuario> buscaParaLogar(String email, String password) {
+    public boolean buscaParaLogar(String email, String senha) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT email, senha FROM Usuarios where email='" + email + "' and senha='" + password + "'", null);
-        List<Usuario> userSenha = new ArrayList<>();
+        Cursor cursor = db.query("Usuarios", null, " " + "email" + "=?", new String[]{email}, null, null, null);
         while (cursor.moveToNext()) {
-            Usuario usuario = new Usuario();
-            usuario.setEmail(cursor.getString(cursor.getColumnIndex("email")));
-            usuario.setSenha(cursor.getString(cursor.getColumnIndex("senha")));
+            if (cursor.isFirst()) {
+                cursor.moveToFirst();
 
-            userSenha.add(usuario);
+                TempPassword = cursor.getString(cursor.getColumnIndex("telefone"));
+            }
         }
-        cursor.close();
-
-        return userSenha;
+        db.close();
+        return TempPassword.equalsIgnoreCase(senha);
     }
 
+    @NonNull
     private ContentValues pegaDadosDoUsuario(Usuario usuario) {
         ContentValues dados = new ContentValues();
         dados.put("nome", usuario.getNome());
