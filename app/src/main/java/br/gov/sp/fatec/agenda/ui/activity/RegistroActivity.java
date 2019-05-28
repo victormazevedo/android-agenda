@@ -126,7 +126,7 @@ public class RegistroActivity extends AppCompatActivity {
             campoNome.setError(null);
         }
 
-        if (telefone.isEmpty() || telefone.length() != 10) {
+        if (telefone.isEmpty() || telefone.length() < 12) {
             campoTelefone.setError("insira um telefone válido");
             valido = false;
         } else {
