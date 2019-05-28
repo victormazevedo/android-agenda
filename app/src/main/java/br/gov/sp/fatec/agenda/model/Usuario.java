@@ -1,7 +1,5 @@
 package br.gov.sp.fatec.agenda.model;
 
-import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
@@ -61,9 +59,14 @@ public class Usuario implements Serializable {
         this.telefone = telefone;
     }
 
-    @NonNull
     @Override
     public String toString() {
-        return nome;
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
     }
 }
