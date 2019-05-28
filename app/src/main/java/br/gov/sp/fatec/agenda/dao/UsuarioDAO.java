@@ -67,7 +67,7 @@ public class UsuarioDAO extends SQLiteOpenHelper {
             if (cursor.isFirst()) {
                 cursor.moveToFirst();
 
-                TempPassword = cursor.getString(cursor.getColumnIndex("telefone"));
+                TempPassword = cursor.getString(cursor.getColumnIndex("senha"));
             }
         }
         db.close();
