@@ -74,7 +74,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         UsuarioDAO dao = new UsuarioDAO(this);
 
-        Usuario usuarioCriado = new Usuario(nome, email, telefone, senha);
+        Usuario usuarioCriado = new Usuario(nome, email, senha, telefone);
 
         dao.insere(usuarioCriado);
         dao.close();
