@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
@@ -27,13 +29,22 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario_aluno);
         setTitle(TITULO_APPBAR);
         definirCorActionBar();
-
         helper = new FormularioHelper(this);
+
+        Spinner spinner = findViewById(R.id.activity_formulario_aluno_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Genero, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         Intent intent = getIntent();
         Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
         if (aluno != null) {
             helper.preencheFormulario(aluno);
+            String pegaGeneroAluno = aluno.getGenero();
+            if (pegaGeneroAluno != null) {
+                int posicaoSpinner = adapter.getPosition(pegaGeneroAluno);
+                spinner.setSelection(posicaoSpinner);
+            }
         }
         configuraBotaoSalvar();
     }
@@ -55,12 +66,11 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#303F9F")));
     }
 
-
     private void salva(Aluno aluno) {
         AlunoDAO dao = new AlunoDAO(this);
-        if(aluno.getId() != null){
+        if (aluno.getId() != null) {
             dao.altera(aluno);
-        }else{
+        } else {
             dao.insere(aluno);
         }
         dao.close();
@@ -68,5 +78,4 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         Toast.makeText(this, "Aluno " + aluno.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
         finish();
     }
-
 }
