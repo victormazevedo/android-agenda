@@ -18,4 +18,10 @@
     <string name="avisos">Avisos</string>
     <string name="channel_name">Teste</string>
     <string name="channel_description">Teste de Notification</string>
+    <string-array name="Genero">
+        <item>    </item>
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Prefere não dizer</item>
+    </string-array>
 </resources>
