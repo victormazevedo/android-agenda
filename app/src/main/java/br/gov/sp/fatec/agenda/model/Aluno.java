@@ -9,7 +9,7 @@ public class Aluno implements Serializable {
     private String nome;
     private String telefone;
     private String email;
-    private Double nota;
+    private String genero;
 
     public Long getId() {
         return id;
@@ -43,12 +43,12 @@ public class Aluno implements Serializable {
         this.email = email;
     }
 
-    public Double getNota() {
-        return nota;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setNota(Double nota) {
-        this.nota = nota;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     @NonNull
