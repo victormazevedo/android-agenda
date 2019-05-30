@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
+import br.gov.sp.fatec.agenda.dao.DatabaseHelper;
 import br.gov.sp.fatec.agenda.dao.UsuarioDAO;
 import br.gov.sp.fatec.agenda.model.Usuario;
 
@@ -26,6 +27,7 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText campoRedigiteSenha;
     private Button botaoRegistrar;
     private TextView loginLink;
+    private DatabaseHelper dbHelper = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +74,12 @@ public class RegistroActivity extends AppCompatActivity {
         String senha = campoSenha.getText().toString();
         String redigiteSenha = campoRedigiteSenha.getText().toString();
 
-        UsuarioDAO dao = new UsuarioDAO(this);
+        UsuarioDAO dao = new UsuarioDAO(dbHelper);
 
         Usuario usuarioCriado = new Usuario(nome, email, senha, telefone);
 
         dao.insere(usuarioCriado);
-        dao.close();
+        dbHelper.close();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
+import br.gov.sp.fatec.agenda.dao.DatabaseHelper;
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class FormularioAlunoActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private Aluno aluno;
     private FormularioHelper helper;
     private ActionBar actionBar;
+    private DatabaseHelper dbHelper = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +69,13 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     }
 
     private void salva(Aluno aluno) {
-        AlunoDAO dao = new AlunoDAO(this);
+        AlunoDAO dao = new AlunoDAO(dbHelper);
         if (aluno.getId() != null) {
             dao.altera(aluno);
         } else {
             dao.insere(aluno);
         }
-        dao.close();
+        dbHelper.close();
 
         Toast.makeText(this, "Aluno " + aluno.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
         finish();

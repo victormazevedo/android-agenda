@@ -23,6 +23,7 @@ import android.widget.ListView;
 
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
+import br.gov.sp.fatec.agenda.dao.DatabaseHelper;
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
     private ActionBar actionBar;
+    private DatabaseHelper dbHelper = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,9 +76,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
                         .setPositiveButton("sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
+                                AlunoDAO dao = new AlunoDAO(dbHelper);
                                 dao.deleta(aluno);
-                                dao.close();
+                                dbHelper.close();
                                 configuraLista();
                             }
                         })
@@ -164,13 +166,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     private void configuraLista() {
-        AlunoDAO dao = new AlunoDAO(this);
+        AlunoDAO dao = new AlunoDAO(dbHelper);
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
         listaDeAlunos.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 dao.buscaAlunos()));
-        dao.close();
+        dbHelper.close();
     }
 
 }
