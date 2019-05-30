@@ -1,43 +1,27 @@
 package br.gov.sp.fatec.agenda.dao;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.gov.sp.fatec.agenda.model.Aluno;
 
-public class AlunoDAO extends SQLiteOpenHelper {
+public class AlunoDAO {
 
-    public AlunoDAO(@Nullable Context context) {
-        super(context, "iAcad", null, 1);
-    }
+    private final DatabaseHelper helper;
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE " + "Alunos (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, telefone TEXT, email TEXT, genero TEXT);";
-        db.execSQL(sql);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "DROP TABLE IF EXISTS Alunos";
-        db.execSQL(sql);
-        onCreate(db);
+    public AlunoDAO(DatabaseHelper helper) {
+        this.helper = helper;
     }
 
     public void insere(Aluno aluno) {
-        SQLiteDatabase db = getWritableDatabase();
-
+        SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues dados = pegaDadosDoAluno(aluno);
-
-        db.insert("Alunos", null, dados);
+        db.insert("Aluno", null, dados);
     }
 
     @NonNull
@@ -50,9 +34,34 @@ public class AlunoDAO extends SQLiteOpenHelper {
         return dados;
     }
 
+//    public List<Object> buscaAlunos() {
+//        String sql = "SELECT a.* FROM Aluno as a INNER JOIN Endereco as e ON (a.id_endereco = e.id);";
+//        String where[] = null;
+//        SQLiteDatabase db = helper.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(sql, null);
+//        List<Object> alunos = new ArrayList<>();
+//        while (cursor.moveToNext()) {
+//            ContentValues obj = new ContentValues();
+//            obj.put("id", cursor.getLong(cursor.getColumnIndex("id")));
+//            obj.put("nome", cursor.getString(cursor.getColumnIndex("nome")));
+//            obj.put("telefone", cursor.getString(cursor.getColumnIndex("telefone")));
+//            obj.put("email", cursor.getString(cursor.getColumnIndex("email")));
+//            obj.put("logradouro", cursor.getString(cursor.getColumnIndex("logradouro")));
+//            obj.put("complemento", cursor.getString(cursor.getColumnIndex("complemento")));
+//            obj.put("bairro", cursor.getString(cursor.getColumnIndex("bairro")));
+//            obj.put("localidade", cursor.getString(cursor.getColumnIndex("localidade")));
+//            obj.put("uf", cursor.getString(cursor.getColumnIndex("uf")));
+//            obj.put("cep", cursor.getString(cursor.getColumnIndex("cep")));
+//            alunos.add(obj);
+//        }
+//        cursor.close();
+//
+//        return alunos;
+//    }
+
     public List<Aluno> buscaAlunos() {
-        String sql = "SELECT * FROM Alunos;";
-        SQLiteDatabase db = getReadableDatabase();
+        String sql = "SELECT * FROM Aluno;";
+        SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         List<Aluno> alunos = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -70,19 +79,21 @@ public class AlunoDAO extends SQLiteOpenHelper {
         return alunos;
     }
 
+
     public void deleta(Aluno aluno) {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = helper.getWritableDatabase();
 
         String[] params = {aluno.getId().toString()};
-        db.delete("Alunos", "id = ?", params);
+        db.delete("Aluno", "id = ?", params);
     }
 
     public void altera(Aluno aluno) {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = helper.getWritableDatabase();
 
         ContentValues dados = pegaDadosDoAluno(aluno);
 
         String[] params = {aluno.getId().toString()};
-        db.update("Alunos", dados, "id = ?", params);
+        db.update("Aluno", dados, "id = ?", params);
     }
 }
+

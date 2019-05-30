@@ -1,49 +1,34 @@
 package br.gov.sp.fatec.agenda.dao;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.gov.sp.fatec.agenda.model.Usuario;
 
-public class UsuarioDAO extends SQLiteOpenHelper {
+public class UsuarioDAO {
 
-    public UsuarioDAO(@Nullable Context context) {
-        super(context, "iAcadUser", null, 1);
-    }
+    private final DatabaseHelper helper;
 
     private String TempPassword = "NOT_FOUND";
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE " +
-                "Usuarios (id INTEGER PRIMARY KEY, nome TEXT, email TEXT, senha TEXT, telefone TEXT);";
-        db.execSQL(sql);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "DROP TABLE IF EXISTS Usuarios";
-        db.execSQL(sql);
-        onCreate(db);
+    public UsuarioDAO(DatabaseHelper helper) {
+        this.helper = helper;
     }
 
     public void insere(Usuario usuario) {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues dados = pegaDadosDoUsuario(usuario);
-        db.insert("Usuarios", null, dados);
+        db.insert("Usuario", null, dados);
     }
 
     public List<Usuario> buscaUsuarios() {
-        String sql = "SELECT * FROM Usuarios;";
-        SQLiteDatabase db = getReadableDatabase();
+        String sql = "SELECT * FROM Usuario;";
+        SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         List<Usuario> alunos = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -61,8 +46,8 @@ public class UsuarioDAO extends SQLiteOpenHelper {
     }
 
     public boolean buscaParaLogar(String email, String senha) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query("Usuarios", null, " " + "email" + "=?", new String[]{email}, null, null, null);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.query("Usuario", null, " " + "email" + "=?", new String[]{email}, null, null, null);
         while (cursor.moveToNext()) {
             if (cursor.isFirst()) {
                 cursor.moveToFirst();
