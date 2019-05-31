@@ -15,12 +15,14 @@ import android.widget.Toast;
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
 import br.gov.sp.fatec.agenda.dao.DatabaseHelper;
+import br.gov.sp.fatec.agenda.dto.EnderecoAlunoDTO;
+import br.gov.sp.fatec.agenda.dao.EnderecoDAO;
 import br.gov.sp.fatec.agenda.model.Aluno;
+import br.gov.sp.fatec.agenda.model.Endereco;
 
 public class FormularioAlunoActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Novo aluno";
-    private Aluno aluno;
     private FormularioHelper helper;
     private ActionBar actionBar;
     private DatabaseHelper dbHelper = new DatabaseHelper(this);
@@ -39,7 +41,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         Intent intent = getIntent();
-        Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
+        EnderecoAlunoDTO aluno = (EnderecoAlunoDTO) intent.getSerializableExtra("aluno");
         if (aluno != null) {
             helper.preencheFormulario(aluno);
             String pegaGeneroAluno = aluno.getGenero();
@@ -58,7 +60,8 @@ public class FormularioAlunoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Aluno alunoCriado = helper.getAluno();
-                salva(alunoCriado);
+                Endereco enderecoCriado = helper.getEndereco();
+                salva(alunoCriado, enderecoCriado);
             }
         });
     }
@@ -68,16 +71,25 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#303F9F")));
     }
 
-    private void salva(Aluno aluno) {
+    private void salva(Aluno aluno, Endereco endereco) {
         AlunoDAO dao = new AlunoDAO(dbHelper);
+        Long idEndereco = salvaEndereco(endereco);
         if (aluno.getId() != null) {
-            dao.altera(aluno);
+            dao.altera(aluno, endereco.getId());
         } else {
-            dao.insere(aluno);
+            dao.insere(aluno, idEndereco);
+
         }
         dbHelper.close();
 
         Toast.makeText(this, "Aluno " + aluno.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    private Long salvaEndereco(Endereco endereco) {
+        EnderecoDAO dao = new EnderecoDAO(dbHelper);
+        dao.insere(endereco);
+        dbHelper.close();
+        return dao.getId();
     }
 }
