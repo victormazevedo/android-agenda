@@ -24,6 +24,7 @@ import android.widget.ListView;
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
 import br.gov.sp.fatec.agenda.dao.DatabaseHelper;
+import br.gov.sp.fatec.agenda.dto.EnderecoAlunoDTO;
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -48,7 +49,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
-                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(position);
+                EnderecoAlunoDTO aluno = (EnderecoAlunoDTO) listaAlunos.getItemAtPosition(position);
                 Intent vaiProFormulario = new Intent(ListaAlunosActivity.this, FormularioAlunoActivity.class);
                 vaiProFormulario.putExtra("aluno", aluno);
                 startActivity(vaiProFormulario);
