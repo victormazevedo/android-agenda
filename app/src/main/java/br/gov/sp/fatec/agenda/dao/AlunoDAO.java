@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.gov.sp.fatec.agenda.dto.EnderecoAlunoDTO;
 import br.gov.sp.fatec.agenda.model.Aluno;
 
 public class AlunoDAO {
@@ -18,67 +19,48 @@ public class AlunoDAO {
         this.helper = helper;
     }
 
-    public void insere(Aluno aluno) {
+    public void insere(Aluno aluno, Long enderecoId) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        ContentValues dados = pegaDadosDoAluno(aluno);
+        ContentValues dados = pegaDadosDoAluno(aluno, enderecoId);
         db.insert("Aluno", null, dados);
     }
 
     @NonNull
-    private ContentValues pegaDadosDoAluno(Aluno aluno) {
+    private ContentValues pegaDadosDoAluno(Aluno aluno, Long enderecoId) {
         ContentValues dados = new ContentValues();
         dados.put("nome", aluno.getNome());
         dados.put("telefone", aluno.getTelefone());
         dados.put("email", aluno.getEmail());
         dados.put("genero", aluno.getGenero());
+        dados.put("id_endereco", enderecoId);
         return dados;
     }
 
-//    public List<Object> buscaAlunos() {
-//        String sql = "SELECT a.* FROM Aluno as a INNER JOIN Endereco as e ON (a.id_endereco = e.id);";
-//        String where[] = null;
-//        SQLiteDatabase db = helper.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(sql, null);
-//        List<Object> alunos = new ArrayList<>();
-//        while (cursor.moveToNext()) {
-//            ContentValues obj = new ContentValues();
-//            obj.put("id", cursor.getLong(cursor.getColumnIndex("id")));
-//            obj.put("nome", cursor.getString(cursor.getColumnIndex("nome")));
-//            obj.put("telefone", cursor.getString(cursor.getColumnIndex("telefone")));
-//            obj.put("email", cursor.getString(cursor.getColumnIndex("email")));
-//            obj.put("logradouro", cursor.getString(cursor.getColumnIndex("logradouro")));
-//            obj.put("complemento", cursor.getString(cursor.getColumnIndex("complemento")));
-//            obj.put("bairro", cursor.getString(cursor.getColumnIndex("bairro")));
-//            obj.put("localidade", cursor.getString(cursor.getColumnIndex("localidade")));
-//            obj.put("uf", cursor.getString(cursor.getColumnIndex("uf")));
-//            obj.put("cep", cursor.getString(cursor.getColumnIndex("cep")));
-//            alunos.add(obj);
-//        }
-//        cursor.close();
-//
-//        return alunos;
-//    }
-
-    public List<Aluno> buscaAlunos() {
-        String sql = "SELECT * FROM Aluno;";
+    public List<EnderecoAlunoDTO> buscaAlunos() {
+        String sql = "SELECT a.*, e.* FROM Aluno as a INNER JOIN Endereco as e ON (a.id_endereco = e.id);";
+        String where[] = null;
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
-        List<Aluno> alunos = new ArrayList<>();
+        List<EnderecoAlunoDTO> alunos = new ArrayList<>();
         while (cursor.moveToNext()) {
-            Aluno aluno = new Aluno();
-            aluno.setId(cursor.getLong(cursor.getColumnIndex("id")));
-            aluno.setNome(cursor.getString(cursor.getColumnIndex("nome")));
-            aluno.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
-            aluno.setEmail(cursor.getString(cursor.getColumnIndex("email")));
-            aluno.setGenero(cursor.getString(cursor.getColumnIndex("genero")));
+            EnderecoAlunoDTO enderecoAlunoDTO = new EnderecoAlunoDTO();
+            enderecoAlunoDTO.setId_aluno(cursor.getLong(cursor.getColumnIndex("id")));
+            enderecoAlunoDTO.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            enderecoAlunoDTO.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
+            enderecoAlunoDTO.setEmail(cursor.getString(cursor.getColumnIndex("email")));
+            enderecoAlunoDTO.setCep(cursor.getString(cursor.getColumnIndex("cep")));
+            enderecoAlunoDTO.setLogradouro(cursor.getString(cursor.getColumnIndex("logradouro")));
+            enderecoAlunoDTO.setComplemento(cursor.getString(cursor.getColumnIndex("complemento")));
+            enderecoAlunoDTO.setBairro(cursor.getString(cursor.getColumnIndex("bairro")));
+            enderecoAlunoDTO.setLocalidade(cursor.getString(cursor.getColumnIndex("localidade")));
+            enderecoAlunoDTO.setUf(cursor.getString(cursor.getColumnIndex("uf")));
 
-            alunos.add(aluno);
+            alunos.add(enderecoAlunoDTO);
         }
         cursor.close();
 
         return alunos;
     }
-
 
     public void deleta(Aluno aluno) {
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -87,10 +69,10 @@ public class AlunoDAO {
         db.delete("Aluno", "id = ?", params);
     }
 
-    public void altera(Aluno aluno) {
+    public void altera(Aluno aluno, Long endercoId) {
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        ContentValues dados = pegaDadosDoAluno(aluno);
+        ContentValues dados = pegaDadosDoAluno(aluno, endercoId);
 
         String[] params = {aluno.getId().toString()};
         db.update("Aluno", dados, "id = ?", params);
