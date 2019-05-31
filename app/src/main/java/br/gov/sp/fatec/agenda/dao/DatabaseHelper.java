@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "iacad.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     private static final String CREATE_TABLE_USUARIO =
             "CREATE TABLE Usuario ( " +
@@ -19,16 +19,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_ALUNO =
             "CREATE TABLE Aluno ( " +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id INTEGER PRIMARY KEY, " +
                     " nome TEXT NOT NULL, " +
                     " telefone TEXT, " +
                     " email TEXT, " +
                     " genero TEXT,  " +
-                    " id_endereco INTEGER " + ")";
+                    " id_endereco INTEGER, " +
+                    " FOREIGN KEY(id_endereco) REFERENCES Endereco(id) " + ")";
 
     private static final String CREATE_TABLE_ENDERECO =
             "CREATE TABLE Endereco ( " +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id INTEGER PRIMARY KEY, " +
                     " cep TEXT NOT NULL, " +
                     " logradouro TEXT, " +
                     " complemento TEXT, " +
