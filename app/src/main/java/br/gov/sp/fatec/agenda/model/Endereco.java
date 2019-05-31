@@ -12,6 +12,13 @@ public class Endereco implements Serializable {
     private String localidade;
     private String uf;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCep() {
         return cep;
