@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -50,7 +50,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:hint="CEP"
-                android:inputType="textPostalAddress"/>
+                android:inputType="textPostalAddress" />
+
+            <Button
+                android:id="@+id/activity_formulario_aluno_botao_busca_cep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Buscar" />
 
             <EditText
                 android:id="@+id/activity_formulario_aluno_logradouro"
@@ -86,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:hint="Uf" />
-
 
             <Button
                 android:id="@+id/activity_formulario_aluno_botao_salvar"
