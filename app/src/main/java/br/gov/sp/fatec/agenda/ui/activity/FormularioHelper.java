@@ -71,4 +71,14 @@ public class FormularioHelper {
         campoUf.setText(aluno.getUf());
         this.enderecoAlunoDTO = aluno;
     }
+
+    public void preencheEnderecoFormulario(Endereco endereco) {
+        campoCep.setText(endereco.getCep());
+        campoLogradouro.setText(endereco.getLogradouro());
+        campoComplemento.setText(endereco.getComplemento());
+        campoBairro.setText(endereco.getBairro());
+        campoCidade.setText(endereco.getLocalidade());
+        campoUf.setText(endereco.getUf());
+        this.endereco = endereco;
+    }
 }
