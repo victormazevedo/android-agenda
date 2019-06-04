@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -85,6 +86,18 @@ public class ListaAlunosActivity extends AppCompatActivity {
                         })
                         .setNegativeButton("não", null)
                         .show();
+                return false;
+            }
+        });
+        MenuItem verMapa = menu.add("Ver no mapa");
+        verMapa.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                final EnderecoAlunoDTO aluno = (EnderecoAlunoDTO) listaAlunos.getItemAtPosition(info.position);
+//                //Intent vaiPraMapa = new Intent(ListaAlunosActivity.this, GoogleMapsActivity.class);
+//                vaiPraMapa.setData(Uri.parse("geo:0,0?q=" + aluno.getLogradouro()));
+//                startActivity(vaiPraMapa);
                 return false;
             }
         });
