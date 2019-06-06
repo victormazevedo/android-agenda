@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import br.gov.sp.fatec.agenda.MapaActivity;
 import br.gov.sp.fatec.agenda.R;
 import br.gov.sp.fatec.agenda.dao.AlunoDAO;
 import br.gov.sp.fatec.agenda.dao.DatabaseHelper;
@@ -94,10 +95,10 @@ public class ListaAlunosActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-                final EnderecoAlunoDTO aluno = (EnderecoAlunoDTO) listaAlunos.getItemAtPosition(info.position);
-//                //Intent vaiPraMapa = new Intent(ListaAlunosActivity.this, GoogleMapsActivity.class);
-//                vaiPraMapa.setData(Uri.parse("geo:0,0?q=" + aluno.getLogradouro()));
-//                startActivity(vaiPraMapa);
+                final EnderecoAlunoDTO dto = (EnderecoAlunoDTO) listaAlunos.getItemAtPosition(info.position);
+                Intent vaiPraMapa = new Intent(ListaAlunosActivity.this, MapaActivity.class);
+                vaiPraMapa.putExtra("endereco", dto);
+                startActivity(vaiPraMapa);
                 return false;
             }
         });
